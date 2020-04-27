@@ -22,7 +22,15 @@ let make = () => {
     {switch (state) {
      | Loading => "Loading..." |> React.string
      | ErrorFetchingWeather => "An error has occurred!" |> React.string
-     | Loaded(data) => "YAY! London's weather data received!" |> React.string
+     | Loaded(data) =>
+       let city = data.city.name;
+       let temp = data.list[0].main.temp;
+       "The temperature in "
+       ++ city
+       ++ " is "
+       ++ Belt.Float.toString(temp)
+       ++ " degrees Celcius."
+       |> React.string;
      }}
   </div>;
 };
